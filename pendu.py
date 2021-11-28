@@ -11,8 +11,7 @@ def str_remove_spaces(str: str):
 
 class Pendu:
 	def __init__(self, window) -> None:
-		# self.mots = ["pizza", "salade", "donner", "bonjour", "calme", "paisible", "pluie", "mer", "eau", "tomate", "oignon"]
-		self.mots = ["ibrahyma"]
+		self.mots = ["pizza", "salade", "donner", "bonjour", "calme", "paisible", "pluie", "mer", "eau", "tomate", "oignon"]
 		self.mot_secret = self.mots[random.randrange(0, len(self.mots))]
 		self.essais_restants = 13
 		self.points = 0
