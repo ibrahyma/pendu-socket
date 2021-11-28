@@ -1,14 +1,12 @@
-import threading, socket, time, re
+import threading, socket, time
 
 class Client():
-    def __init__(self, username, server, port):
+    def __init__(self, server, port):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.connect((server, port))
-        self.username = username
-        self.send("USERNAME {0}".format(username))
         self.listening = True
 
-    def listener(self):
+    def recv_data_handler(self):
         while self.listening:
             data = ""
             try:
@@ -19,37 +17,37 @@ class Client():
             time.sleep(0.1)
        
     def listen(self):
-        self.listen_thread = threading.Thread(target = self.listener)
+        self.listen_thread = threading.Thread(target = self.recv_data_handler)
         self.listen_thread.daemon = True
         self.listen_thread.start()
 
     def send(self, message):
         try:
-            username_result = re.search('^USERNAME (.*)$', message)
-            if (not username_result):
-                message= "{0}: {1}".format(self.username, message)
             self.socket.sendall(message.encode("UTF-8"))
         except socket.error:
             print("unable to send message")
    
-    def tidy_up(self):
+    def quit(self):
         self.listening = False
         self.socket.close()
 
     def handle_msg(self, data):
-        if (data == "QUIT"):
-            self.tidy_up()
-        elif (data == ""):
-            self.tidy_up()
+        if data == "QUIT":
+            self.quit()
+        elif data == "":
+            self.quit()
         else:
             print(data)
 
-if (__name__ == "__main__"):
-    username = input("username: ")
-    client = Client(username, '127.0.0.1', 4321)
-    client.listen()
-    message = ""
+if __name__ == "__main__":
+    try:
+        client = Client('127.0.0.1', 4321)
+        client.listen()
+        message = ""
 
-    while (message != "QUIT"):
-        message = input()
-        client.send(message)
+        while (message != "QUIT"):
+            message = input()
+            if (message != ""):
+                client.send(message)
+    except KeyboardInterrupt:
+        quit(0)
