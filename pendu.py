@@ -1,7 +1,6 @@
 import re, random
 from tkinter import *
-from tkinter import messagebox
-from pygame.locals import *
+from tkinter.messagebox import *
 
 def str_add_spaces_between_chars(str: str):
 	return " ".join(str)
@@ -65,24 +64,24 @@ class Pendu:
 				self.txtvar_label_motsecret.set(self.modele_du_mot)
 
 				if self.points == len(self.mot_secret):
-					messagebox.showinfo(title = "GG", message = "GG")
+					showinfo(title = "GG", message = "GG")
 					exit(0)
 
 			else:
-				messagebox.showinfo(title = "Attention", message = "Cette lettre a déjà été proposée...")
+				showinfo(title = "Attention", message = "Cette lettre a déjà été proposée...")
 
 		else:
 			if not isAlreadyTried:
 				self.essais_restants -= 1
 				self.txtvar_label_essais.set(f"{self.essais_restants} essais avant la pendaison")
-				messagebox.showinfo(title = "Ooops", message = "Raté")
+				showinfo(title = "Ooops", message = "Raté")
 
 
 				if self.essais_restants == 0:
-					messagebox.showinfo(title = "Bien essayé", message = "Tu as perdu. Le mot était '" + self.mot_secret + "'.")
+					showinfo(title = "Bien essayé", message = "Tu as perdu. Le mot était '" + self.mot_secret + "'.")
 					exit(0)
 			else:
-				messagebox.showinfo(title = "Attention", message = "Cette lettre a déjà été proposée...")
+				showinfo(title = "Attention", message = "Cette lettre a déjà été proposée...")
 
 		if not lettre in self.lettres_proposees: self.lettres_proposees.append(lettre)
 
