@@ -4,21 +4,17 @@ from clientListener import ClientListener
 
 class Server():
     def __init__(self, port):
-        self.mots = ["pizza", "salade", "donner", "bonjour", "calme", "paisible", "pluie", "mer", "eau",
-            "tomate", "oignon", "dune", "dictionnaire", "malinois", "chien", "chat", "pension", "amour", "programmation",
-            "legume", "rap", "cookie", "class", "informatique", "acrimonie", "achaler", "acrostiche", "ambages", "aplacophore",
-            "babiller", "bome", "bamboche", "bonzesse", "callipyge", "calter", "capitation", "dessiccateur","distal", "doxa", "ductile",
-            "epacte", "entropie", "epithalame", "ensiforme", "eburne", "equanamite", "febricule", "flagorner", "fustet", "faix", "glose",
-            "glairer", "gambit", "gabarre", "gone", "grigne", "covid", "dragon", "ball", "griffe", "haret", "hyphe", "holisme", "hypocondarique",
-            "hypotypose", "hellenisation", "incube", "infundubuliforme", "impavide", "intertidal", "jactance", "janotisme",
-            "jobastre", "jaculatoire", "kaolin", "kaon", "kenophobie", "kraken", "lacunaire", "lallation", "lege", "lacustre",
-            "lavure", "liponombre", "lipopremier", "macache", "makimono", "meson", "mas", "maltose", "mandala", "mediocratie", "miston",
-            "misogyne", "misandre", "mistoufle", "merzlota", "mentisme", "mirliflore", "matefaim", "metonymie", "mezigue", "mutant",
-            "modenature", "moderateur", "muance", "nadir", "notule", "nasarde", "nife", "nervation", "nanan", "nib", "nervi", "nubile",
-            "objectivation", "objuration", "obvie", "onagre", "oekoumene", "onychophagie", "orant", "ovalie", "opprobre",
-            "pasquin", "peguer", "perissologie", "phenakistiscope", "peronnelle", "paratexte", "planification", "perle", "parangon",
-            "petuner", "petiole", "pica","piauler", "pioupiou", "succube", "sphinge", "satyiasis", "tuple", "tautologie", "tétraktys",
-            "triskaidekaphobie", "valetudinaire", "zebre", "paix", "peace", "love", "hate", "pendu", "navigateur", "pikachu"]
+        self.mots = ["pikachu", "evolie", "bulbizarre", "herbizarre", "florizarre", "salameche", "reptincel", "dracaufeu", "carapuce", "carabaffe", "tortank", "chenipan", "chrysacier",
+         "papilusion", "aspicot", "coconfort", "dardargnan", "roucool", "roucoups", "roucarnage", "rattata", "rattatac", "piafabec", "rapasdepic", "abo", "arbok",
+         "raichu", "sabelette", "sablaireau", "nidoran", "nidorina", "nidoqueen", "nidorino", "nidoking", "melofee", "melodelfe", "goupix", "feunard", "roudoudou", "groudoudou",
+         "nosferapti", "nosferalto", "mystherbe", "ortide", "rafflesia", "paras", "parasect", "mimitoss", "aeromite", "taupiqueur", "triopikeur", "miaouss", "persian", "psykokwak",
+         "akwakwak", "ferosinge", "colossinge", "caninos", "arcanin", "pitatard", "tetarte", "tartard", "abra", "kadabra", "alakazam", "machoc", "machopeur", "mackogneur", "chetiflor",
+         "boustiflor", "empliflor", "tentacool", "tentacruel", "racaillou", "gravalanch", "grolem", "ponyta", "galopa", "ramoloss", "flagadoss", "magneti", "magneton", "canarticho", "doduo",
+         "otaria", "lamanrine", "tadmorv", "grotadmorv", "kokiyas", "crustabri", "fantominus", "spectrum", "ectoplama", "onix", "soporifik", "hypnomade", "krabby", "krabboss", "voltorbe",
+         "electrode", "noeunoeuf", "noadkoko", "osselait", "ossatueur", "kicklee", "tygnon", "excelangue", "smogo", "smogogo", "rhinocorne", "rhinoferos", "leveinard", "saquedeneu", 
+         "kangourex", "hypotrempe", "hypocean", "poissirene", "poissoroy", "stari", "staross", "m.mime", "insecateur", "lippoutou", "elektek", "magmar", "scarabrute", "tauros",
+         "magicarpe", "leviator", "Lokhlass","metamorph", "aquali", "voltali", "pyroli", "porygon", "amonita", "amonistar", "kabuto", "kabutops", "ptera", "ronflex", "artikodin",
+         "electhor", "sulfura", "minidraco", "draco", "dracolosse", "mewtwo", "mew"]
         self.mot_secret = self.mots[random.randrange(0, len(self.mots))]
         self.essais_restants = 10
         self.points = 0
