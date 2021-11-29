@@ -7,7 +7,7 @@ class Server():
         self.mots = ["pizza", "salade", "donner", "bonjour", "calme", "paisible", "pluie", "mer", "eau",
          "tomate", "oignon", "dune", "dictionnaire", "malinois", "chien", "chat", "pension", "amour", "programmation",
          "legume", "rap", "cookie", "class", "informatique", "acrimonie", "achaler", "acrostiche", "ambages", "aplacophore",
-         "babiller", "bome", "bamboche", "bonzesse",, "callipyge", "calter", "capitation", "dessiccateur","distal", "doxa", "ductile",
+         "babiller", "bome", "bamboche", "bonzesse", "callipyge", "calter", "capitation", "dessiccateur","distal", "doxa", "ductile",
          "epacte", "entropie", "epithalame", "ensiforme", "eburne", "equanamite", "febricule", "flagorner", "fustet", "faix", "glose",
          "glairer", "gambit", "gabarre", "gone", "grigne", "covid", "dragon", "ball", "griffe", "haret", "hyphe", "holisme", "hypocondarique",
          "hypotypose", "hellenisation", "incube", "infundubuliforme", "impavide", "intertidal", "jactance", "janotisme",
