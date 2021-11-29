@@ -16,7 +16,7 @@ class Server():
             "magicarpe", "leviator", "Lokhlass","metamorph", "aquali", "voltali", "pyroli", "porygon", "amonita", "amonistar", "kabuto", "kabutops", "ptera", "ronflex", "artikodin",
             "electhor", "sulfura", "minidraco", "draco", "dracolosse", "mewtwo", "mew"]
         self.mot_secret = self.mots[random.randrange(0, len(self.mots))]
-        self.essais_restants = 13
+        self.essais_restants = 10
         self.points = 0
         self.modele_du_mot = self.str_add_spaces_between_chars("_" * len(self.mot_secret))
         self.lettres_proposees = []
