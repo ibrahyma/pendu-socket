@@ -10,7 +10,7 @@ class Server():
          "nosferapti", "nosferalto", "mystherbe", "ortide", "rafflesia", "paras", "parasect", "mimitoss", "aeromite", "taupiqueur", "triopikeur", "miaouss", "persian", "psykokwak",
          "akwakwak", "ferosinge", "colossinge", "caninos", "arcanin", "pitatard", "tetarte", "tartard", "abra", "kadabra", "alakazam", "machoc", "machopeur", "mackogneur", "chetiflor",
          "boustiflor", "empliflor", "tentacool", "tentacruel", "racaillou", "gravalanch", "grolem", "ponyta", "galopa", "ramoloss", "flagadoss", "magneti", "magneton", "canarticho", "doduo",
-         "otaria", "lamanrine", "tadmorv", "grotadmorv", "kokiyas", "crustabri", "fantominus", "spectrum", "ectoplama", "onix", "soporifik", "hypnomade", "krabby", "krabboss", "voltorbe",
+         "otaria", "lamantine", "tadmorv", "grotadmorv", "kokiyas", "crustabri", "fantominus", "spectrum", "ectoplama", "onix", "soporifik", "hypnomade", "krabby", "krabboss", "voltorbe",
          "electrode", "noeunoeuf", "noadkoko", "osselait", "ossatueur", "kicklee", "tygnon", "excelangue", "smogo", "smogogo", "rhinocorne", "rhinoferos", "leveinard", "saquedeneu", 
          "kangourex", "hypotrempe", "hypocean", "poissirene", "poissoroy", "stari", "staross", "m.mime", "insecateur", "lippoutou", "elektek", "magmar", "scarabrute", "tauros",
          "magicarpe", "leviator", "Lokhlass","metamorph", "aquali", "voltali", "pyroli", "porygon", "amonita", "amonistar", "kabuto", "kabutops", "ptera", "ronflex", "artikodin",
