@@ -4,8 +4,17 @@ from clientListener import ClientListener
 
 class Server():
     def __init__(self, port):
-        self.mots = ["hello"]
-        # self.mots = ["pizza", "salade", "donner", "bonjour", "calme", "paisible", "pluie", "mer", "eau", "tomate", "oignon"]
+        self.mots = ["pikachu", "evoli", "bulbizarre", "herbizarre", "florizarre", "salameche", "reptincel", "dracaufeu", "carapuce", "carabaffe", "tortank", "chenipan", "chrysacier",
+            "papilusion", "aspicot", "coconfort", "dardargnan", "roucool", "roucoups", "roucarnage", "rattata", "rattatac", "piafabec", "rapasdepic", "abo", "arbok",
+            "raichu", "sabelette", "sablaireau", "nidoran", "nidorina", "nidoqueen", "nidorino", "nidoking", "melofee", "melodelfe", "goupix", "feunard", "roudoudou", "groudoudou",
+            "nosferapti", "nosferalto", "mystherbe", "ortide", "rafflesia", "paras", "parasect", "mimitoss", "aeromite", "taupiqueur", "triopikeur", "miaouss", "persian", "psykokwak",
+            "akwakwak", "ferosinge", "colossinge", "caninos", "arcanin", "pitatard", "tetarte", "tartard", "abra", "kadabra", "alakazam", "machoc", "machopeur", "mackogneur", "chetiflor",
+            "boustiflor", "empliflor", "tentacool", "tentacruel", "racaillou", "gravalanch", "grolem", "ponyta", "galopa", "ramoloss", "flagadoss", "magneti", "magneton", "canarticho", "doduo",
+            "otaria", "lamantine", "tadmorv", "grotadmorv", "kokiyas", "crustabri", "fantominus", "spectrum", "ectoplama", "onix", "soporifik", "hypnomade", "krabby", "krabboss", "voltorbe",
+            "electrode", "noeunoeuf", "noadkoko", "osselait", "ossatueur", "kicklee", "tygnon", "excelangue", "smogo", "smogogo", "rhinocorne", "rhinoferos", "leveinard", "saquedeneu", 
+            "kangourex", "hypotrempe", "hypocean", "poissirene", "poissoroy", "stari", "staross", "m.mime", "insecateur", "lippoutou", "elektek", "magmar", "scarabrute", "tauros",
+            "magicarpe", "leviator", "Lokhlass","metamorph", "aquali", "voltali", "pyroli", "porygon", "amonita", "amonistar", "kabuto", "kabutops", "ptera", "ronflex", "artikodin",
+            "electhor", "sulfura", "minidraco", "draco", "dracolosse", "mewtwo", "mew"]
         self.mot_secret = self.mots[random.randrange(0, len(self.mots))]
         self.essais_restants = 13
         self.points = 0
