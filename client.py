@@ -42,6 +42,8 @@ class Client():
                             self.txtvar_label_motsecret.set(dataToReceive["modele_du_mot"])
                         if "messagebox" in dataToReceive.keys():
                             showinfo(message = dataToReceive["messagebox"])
+                        if "endgame" in dataToReceive.keys():
+                            exit(0)
                 
             except socket.error:
                 print("Unable to receive data")

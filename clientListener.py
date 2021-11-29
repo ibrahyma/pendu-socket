@@ -11,11 +11,11 @@ class ClientListener(threading.Thread):
 
     def run(self):
         while self.listening:
-            print("Chances:", str(self.server.essais_restants))
             dataToSend = {
                 "modele_du_mot": self.server.modele_du_mot,
                 "essais_restants": self.server.essais_restants
             }
+
             if self.server.points == 0 and self.server.essais_restants == 13:
                 self.server.echo(dataToSend)
 
@@ -30,7 +30,6 @@ class ClientListener(threading.Thread):
 
                 if letter in self.server.lettres_proposees:
                     dataToSend["messagebox"] = "Cette lettre a déjà été proposée..."
-                    # self.server.echo({ "message": "Cette lettre a déjà été proposée..." })
                 else:
                     self.server.lettres_proposees.append(letter)
 
@@ -41,27 +40,22 @@ class ClientListener(threading.Thread):
                             modele = self.server.str_remove_spaces(self.server.modele_du_mot)
                             nouveau_modele = self.server.replacer(modele, letter, x)
                             self.server.modele_du_mot = self.server.str_add_spaces_between_chars(nouveau_modele)
-                            # self.server.echo({ "modele_du_mot": self.server.modele_du_mot })
                             dataToSend["modele_du_mot"] = self.server.modele_du_mot
 
                         if self.server.points == len(self.server.mot_secret):
-                            # self.server.echo({ "message": "GG !!!" })
                             dataToSend["messagebox"] = "GG !!!"
-                            self.listening = False
-                            return
+                            dataToSend["endgame"] = True
+
                     else:
                         self.server.essais_restants -= 1
-                        # self.server.echo({ "essais_restants": self.server.essais_restants })
                         dataToSend["essais_restants"] = self.server.essais_restants
 
                         if self.server.essais_restants == 0:
-                            # self.server.echo({ "message": f"Perdu. Le mot était '{self.server.mot_secret}'." })
                             dataToSend["messagebox"] = f"Perdu. Le mot était '{self.server.mot_secret}'."
-                            self.listening = False
-                            return
+                            dataToSend["endgame"] = True
                         else:
-                            # self.server.echo({ "message": "Faux. Il reste {0} essais.".format(str(self.server.essais_restants)) })
                             dataToSend["messagebox"] = "Faux. Il reste {0} essais.".format(str(self.server.essais_restants))
+                self.server.echo(dataToSend)
             except socket.error:
                 print("Unable to receive data")
             except Exception:
@@ -69,7 +63,6 @@ class ClientListener(threading.Thread):
             except KeyboardInterrupt:
                 self.listening = False
                 break
-            self.server.echo(dataToSend)
             self.handle_msg(dataToReceive)
 
     def handle_msg(self, data: dict):
