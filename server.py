@@ -4,8 +4,21 @@ from clientListener import ClientListener
 
 class Server():
     def __init__(self, port):
-        self.mots = ["hello"]
-        # self.mots = ["pizza", "salade", "donner", "bonjour", "calme", "paisible", "pluie", "mer", "eau", "tomate", "oignon"]
+        self.mots = ["pizza", "salade", "donner", "bonjour", "calme", "paisible", "pluie", "mer", "eau",
+         "tomate", "oignon", "dune", "dictionnaire", "malinois", "chien", "chat", "pension", "amour", "programmation",
+         "legume", "rap", "cookie", "class", "informatique", "acrimonie", "achaler", "acrostiche", "ambages", "aplacophore",
+         "babiller", "bome", "bamboche", "bonzesse",, "callipyge", "calter", "capitation", "dessiccateur","distal", "doxa", "ductile",
+         "epacte", "entropie", "epithalame", "ensiforme", "eburne", "equanamite", "febricule", "flagorner", "fustet", "faix", "glose",
+         "glairer", "gambit", "gabarre", "gone", "grigne", "covid", "dragon", "ball", "griffe", "haret", "hyphe", "holisme", "hypocondarique",
+         "hypotypose", "hellenisation", "incube", "infundubuliforme", "impavide", "intertidal", "jactance", "janotisme",
+         "jobastre", "jaculatoire", "kaolin", "kaon", "kenophobie", "kraken", "lacunaire", "lallation", "lege", "lacustre",
+         "lavure", "liponombre", "lipopremier", "macache", "makimono", "meson", "mas", "maltose", "mandala", "mediocratie", "miston",
+         "misogyne", "misandre", "mistoufle", "merzlota", "mentisme", "mirliflore", "matefaim", "metonymie", "mezigue", "mutant",
+         "modenature", "moderateur", "muance", "nadir", "notule", "nasarde", "nife", "nervation", "nanan", "nib", "nervi", "nubile",
+         "objectivation", "objuration", "obvie", "onagre", "oekoumene", "onychophagie", "orant", "ovalie", "opprobre",
+         "pasquin", "peguer", "perissologie", "phenakistiscope", "peronnelle", "paratexte", "planification", "perle", "parangon",
+         "petuner", "petiole", "pica","piauler", "pioupiou", "succube", "sphinge", "satyiasis", "tuple", "tautologie", "tétraktys",
+         "triskaidekaphobie", "valetudinaire", "zebre", "paix", "peace", "love", "hate", "pendu", "navigateur", "pikachu"]
         self.mot_secret = self.mots[random.randrange(0, len(self.mots))]
         self.essais_restants = 13
         self.points = 0
