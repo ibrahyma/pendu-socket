@@ -1,4 +1,5 @@
-import socket, threading, re, time
+from json.decoder import JSONDecodeError
+import socket, threading, re, json
 
 class ClientListener(threading.Thread):
     def __init__(self, server, socket, address):
@@ -10,58 +11,71 @@ class ClientListener(threading.Thread):
 
     def run(self):
         while self.listening:
-            self.server.echo(f"\n\nModèle du mot : {self.server.modele_du_mot}\n")
-            self.server.echo(f"Lettres utilisées : {str(self.server.lettres_proposees)}\n")
+            print("Chances:", str(self.server.essais_restants))
+            dataToSend = {
+                "modele_du_mot": self.server.modele_du_mot,
+                "essais_restants": self.server.essais_restants
+            }
+            if self.server.points == 0 and self.server.essais_restants == 13:
+                self.server.echo(dataToSend)
 
             data = ""
             try:
                 data: str = self.socket.recv(1024).decode('UTF-8')
-                letter = data[0].lower()
+                dataToReceive = json.loads(data)
+                letter = dataToReceive["message"].lower()[0]
 
                 if letter == "":
                     raise Exception()
-                if letter in self.server.mot_secret:
-                    if not letter in self.server.lettres_proposees:	
+
+                if letter in self.server.lettres_proposees:
+                    dataToSend["messagebox"] = "Cette lettre a déjà été proposée..."
+                    # self.server.echo({ "message": "Cette lettre a déjà été proposée..." })
+                else:
+                    self.server.lettres_proposees.append(letter)
+
+                    if letter in self.server.mot_secret:
                         self.server.points += self.server.mot_secret.count(letter)
-                        self.server.echo("\n\nExact. Vous avez " + str(self.server.points) + " points.\n")
 
                         for x in [m.start() for m in re.finditer(letter, self.server.mot_secret)]:
                             modele = self.server.str_remove_spaces(self.server.modele_du_mot)
                             nouveau_modele = self.server.replacer(modele, letter, x)
                             self.server.modele_du_mot = self.server.str_add_spaces_between_chars(nouveau_modele)
-                            self.server.echo(f"\n\nModèle du mot : {self.server.modele_du_mot}")
+                            # self.server.echo({ "modele_du_mot": self.server.modele_du_mot })
+                            dataToSend["modele_du_mot"] = self.server.modele_du_mot
 
                         if self.server.points == len(self.server.mot_secret):
-                            self.server.echo("\nGG !!!")
-                            exit(0)
+                            # self.server.echo({ "message": "GG !!!" })
+                            dataToSend["messagebox"] = "GG !!!"
+                            self.listening = False
+                            return
                     else:
-                        self.server.echo("Cette lettre a déjà été proposée...")
-                else:
-                    self.server.essais_restants -= 1
-                    if self.server.essais_restants == 0:
-                        self.server.echo("Perdu. Le mot était '" + self.server.mot_secret + "'.")
-                        exit(0)
+                        self.server.essais_restants -= 1
+                        # self.server.echo({ "essais_restants": self.server.essais_restants })
+                        dataToSend["essais_restants"] = self.server.essais_restants
 
-                    self.server.echo(f"Faux. Il reste {str(self.server.essais_restants)} essais.")
-
-                if not letter in self.server.lettres_proposees:
-                    self.server.lettres_proposees.append(letter)
-
+                        if self.server.essais_restants == 0:
+                            # self.server.echo({ "message": f"Perdu. Le mot était '{self.server.mot_secret}'." })
+                            dataToSend["messagebox"] = f"Perdu. Le mot était '{self.server.mot_secret}'."
+                            self.listening = False
+                            return
+                        else:
+                            # self.server.echo({ "message": "Faux. Il reste {0} essais.".format(str(self.server.essais_restants)) })
+                            dataToSend["messagebox"] = "Faux. Il reste {0} essais.".format(str(self.server.essais_restants))
             except socket.error:
                 print("Unable to receive data")
             except Exception:
-                print()
-            self.handle_msg(data)
-            time.sleep(0.1)
+                continue
+            except KeyboardInterrupt:
+                self.listening = False
+                break
+            self.server.echo(dataToSend)
+            self.handle_msg(dataToReceive)
 
-    def quit(self):
-        self.listening = False
-        self.socket.close()
-        self.server.remove_socket(self.socket)
-
-    def handle_msg(self, data):
-        print(self.address, "sent :", data)
-        if data == "QUIT" or data == "":
-            self.quit()
+    def handle_msg(self, data: dict):
+        if data["message"] == "QUIT" or data["message"] == "":
+            self.listening = False
+            self.socket.close()
+            self.server.remove_socket(self.socket)
         else:
             self.server.echo(data)

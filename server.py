@@ -1,4 +1,4 @@
-import socket, signal, sys, time, random
+import socket, signal, sys, random, json
 
 from clientListener import ClientListener
 
@@ -21,7 +21,6 @@ class Server():
 
     def signal_handler(self, signal, frame):
         self.listener.close()
-        self.echo("QUIT")
 
     def str_add_spaces_between_chars(self, str: str):
         return " ".join(str)
@@ -31,16 +30,18 @@ class Server():
 
     def run(self):
         while True:
-            print("En attente de joueurs...")
             try:
-                (client_socket, client_adress) = self.listener.accept()
-            except socket.error:
-                sys.exit("Cannot connect clients")
-            self.clients_sockets.append(client_socket)
-            print("Start the thread for client:", client_adress)
-            client_thread = ClientListener(self, client_socket, client_adress)
-            client_thread.start()
-            time.sleep(0.1)
+                print("En attente de joueurs...")
+                try:
+                    (client_socket, client_adress) = self.listener.accept()
+                except socket.error:
+                    sys.exit('Connexion aux joueurs impossible')
+                self.clients_sockets.append(client_socket)
+                print("Start the thread for client:", client_adress)
+                client_thread = ClientListener(self, client_socket, client_adress)
+                client_thread.start()
+            except KeyboardInterrupt:
+                quit(0)
 
     def replacer(self, s, newstring, index, nofail=False):
         if not nofail and index not in range(len(s)):
@@ -58,16 +59,14 @@ class Server():
     def remove_socket(self, socket):
         self.client_sockets.remove(socket)
 
-    def echo(self, data):
+    def echo(self, data: dict):
+        dataToSend = json.dumps(data)
         for sock in self.clients_sockets:
             try:
-                sock.sendall(data.encode("UTF-8"))
+                sock.sendall(dataToSend.encode("UTF-8"))
             except socket.error:
                 print("Cannot send the message")
 
 if __name__ == "__main__":
-    try:
-        server = Server(4321)
-        server.run()
-    except KeyboardInterrupt:
-        quit(0)
+    server = Server(1234)
+    server.run()
